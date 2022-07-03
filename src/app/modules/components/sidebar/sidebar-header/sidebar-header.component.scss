@@ -1,0 +1,9 @@
+:host ::ng-deep {
+  .dropDownMenu {
+    width: 3rem;
+    .dropDownMenuButton {
+      width: 3rem;
+      height: 3rem;
+    }
+  }
+}
