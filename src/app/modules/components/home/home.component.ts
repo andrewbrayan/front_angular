@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Store } from '@ngrx/store';
 
 @Component({
   selector: 'app-home',
@@ -9,7 +10,7 @@ export class HomeComponent implements OnInit {
 
   display: boolean = false;
 
-  constructor() {}
+  constructor(private store: Store) {}
 
   ngOnInit() {
   }

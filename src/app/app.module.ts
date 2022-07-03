@@ -7,8 +7,10 @@ import { AppRoutingModule } from './app-routing.module';
 // * Import environment
 import { environment } from '@environment/environment';
 // * Import custom modules
-import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+// NGRX
 import { StoreModule } from '@ngrx/store';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { ROOT_REDUCERS } from '@modules/ngrx/app.state';
 
 @NgModule({
   declarations: [
@@ -17,7 +19,7 @@ import { StoreModule } from '@ngrx/store';
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
-    StoreModule.forRoot({}, {}),
+    StoreModule.forRoot(ROOT_REDUCERS),
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production }),
     AppRoutingModule
   ],
