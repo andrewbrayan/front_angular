@@ -1,4 +1,13 @@
-.sidebar {
-  width: 25vw;
-  height: 100vh;
+.main-content {
+
+  .sidebar {
+    width: 25vw;
+    height: 100vh;
+    z-index: 5;
+  }
+  .chat {
+    width: 75vw;
+    height: 100vh;
+    z-index: 4;
+  }
 }

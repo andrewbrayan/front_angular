@@ -1,0 +1,19 @@
+.right-bubble {
+  float: right;
+}
+
+.left-bubble {
+  float: right;
+}
+
+:host ::ng-deep {
+  .bubble-section {
+    max-width: 75%;
+    padding: 1rem;
+    .p-element {
+      .p-card-body {
+        padding: 0;
+      }
+    }
+  }
+}

@@ -4,11 +4,12 @@ import { CommonModule } from '@angular/common';
 import { HomeRoutingModule } from './home-routing.module';
 import { HomeComponent } from './home.component';
 // * Import custom modules
-import { SidebarModule } from '../sidebar/sidebar.module';
+import { SidebarModule } from '@modules/components/sidebar/sidebar.module';
+import { ChatModule } from '@modules/components/chat/chat.module';
 
 @NgModule({
   declarations: [HomeComponent],
-  imports: [CommonModule, HomeRoutingModule, SidebarModule],
+  imports: [CommonModule, HomeRoutingModule, SidebarModule, ChatModule],
   providers: [],
 })
 export class HomeModule {}

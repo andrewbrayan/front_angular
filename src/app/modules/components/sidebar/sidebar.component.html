@@ -1,6 +1,12 @@
-<app-sidebar-header></app-sidebar-header>
-<app-sidebar-chat></app-sidebar-chat>
-<app-sidebar-chat></app-sidebar-chat>
-<app-sidebar-chat></app-sidebar-chat>
-<app-sidebar-chat></app-sidebar-chat>
-<app-sidebar-chat></app-sidebar-chat>
+<section class="flex flex-column h-full">
+  <app-sidebar-header></app-sidebar-header>
+  <section class="flex justify-content-center p-2">
+    <span class="p-input-icon-left w-full">
+      <i class="pi pi-search"></i>
+      <input type="text" class="w-full" pInputText placeholder="Search">
+    </span>
+  </section>
+  <section class="h-full">
+    <app-sidebar-chat></app-sidebar-chat>
+  </section>
+</section>

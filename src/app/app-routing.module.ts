@@ -7,6 +7,16 @@ const routes: Routes = [
     loadChildren: () =>
       import('@modules/components/home/home.module').then((m) => m.HomeModule),
   },
+  {
+    path: 'signin',
+    loadChildren: () =>
+      import('@modules/components/home/home.module').then((m) => m.HomeModule),
+  },
+  {
+    path: 'signup',
+    loadChildren: () =>
+      import('@modules/components/home/home.module').then((m) => m.HomeModule),
+  },
 ];
 
 @NgModule({

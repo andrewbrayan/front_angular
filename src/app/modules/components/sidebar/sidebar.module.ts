@@ -10,12 +10,13 @@ import { SpeedDialModule } from 'primeng/speeddial';
 import { RippleModule } from 'primeng/ripple';
 import { ToastModule } from 'primeng/toast';
 import { CardModule } from 'primeng/card';
+import { InputTextModule } from 'primeng/inputtext';
 
 @NgModule({
   declarations: [
     SidebarComponent,
     SidebarHeaderComponent,
-    SidebarChatComponent
+    SidebarChatComponent,
   ],
   imports: [
     CommonModule,
@@ -24,9 +25,8 @@ import { CardModule } from 'primeng/card';
     RippleModule,
     ToastModule,
     CardModule,
+    InputTextModule,
   ],
-  exports: [
-    SidebarComponent
-  ]
+  exports: [SidebarComponent],
 })
-export class SidebarModule { }
+export class SidebarModule {}

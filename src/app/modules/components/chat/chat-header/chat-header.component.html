@@ -1,0 +1,10 @@
+<nav class="flex align-items-center bg-teal-600 p-2">
+  <div class="flex-none flex">
+    <p-avatar image="user.png" size="large"></p-avatar>
+  </div>
+  <div class="flex-grow-1 flex"></div>
+  <div class="flex-none flex dropDownMenu">
+    <p-menu [showTransitionOptions]="'50ms'" [hideTransitionOptions]="'50ms'" #menu [popup]="true" [model]="items"></p-menu>
+    <button type="button" pButton pRipple icon="pi pi-ellipsis-v" class="p-button-rounded p-button-help" (click)="menu.toggle($event)"></button>
+  </div>
+</nav>
