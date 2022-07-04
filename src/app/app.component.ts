@@ -8,6 +8,7 @@ import { PrimeNGConfig } from 'primeng/api';
 import { Store } from '@ngrx/store';
 import { loadUser } from '@modules/ngrx/actions/user.actions';
 import { selectLoading } from '@modules/ngrx/selectors/user.selectors';
+import { AppState } from '@modules/ngrx/app.state';
 
 @Component({
   selector: 'app-root',
@@ -18,11 +19,11 @@ export class AppComponent {
   title = 'BAM_Chat';
   loadingUser$: Observable<boolean> = new Observable();
 
-  constructor(private primengConfig: PrimeNGConfig, private store: Store) {}
+  constructor(private primengConfig: PrimeNGConfig, private store: Store<AppState>) {}
 
   ngOnInit() {
-    this.primengConfig.ripple = true;
-    this.store.dispatch(loadUser());
     this.loadingUser$ = this.store.select(selectLoading);
+    this.store.dispatch(loadUser());
+    this.primengConfig.ripple = true;
   }
 }
