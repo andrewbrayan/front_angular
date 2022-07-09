@@ -7,7 +7,7 @@
       "@shared/*": ["app/shared/*"],
       "@environment/*": ["environments/*"],
       "@modules/*": ["app/modules/*"],
-      "@assets/*": ["app/assets/*"],
+      "@assets/*": ["assets/*"],
   },
     "outDir": "./dist/out-tsc",
     "forceConsistentCasingInFileNames": true,
