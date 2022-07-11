@@ -1,9 +1,10 @@
 import { createReducer, on } from '@ngrx/store';
-import { loadUser, loadUserError, loadUserSuccess } from '@modules/ngrx/actions/user.actions';
+import { loadUser, loadUserError, loadUserSuccess, loginUser } from '@modules/ngrx/actions/user.actions';
 import { UserState } from '@modules/ngrx/models/user.state';
 
 export const initialState: UserState = {
   loading: false,
+  error: '',
   userData: {
     _id: '',
     name: '',
@@ -14,12 +15,14 @@ export const initialState: UserState = {
     image: '',
     role: '',
   },
-  error: '',
 };
 
 export const userReducer = createReducer(
   initialState,
-  on(loadUser, (state: UserState) => {
+  on(loadUser, (state: UserState, {userToken}) => {
+    return { ...state, loading: true };
+  }),
+  on(loginUser, (state: UserState, {credentials}) => {
     return { ...state, loading: true };
   }),
   on(loadUserSuccess, (state: UserState, {userData}) => {

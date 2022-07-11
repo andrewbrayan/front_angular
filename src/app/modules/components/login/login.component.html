@@ -1,1 +1,47 @@
-<p>login works!</p>
+<section class="main-container">
+  <img src="../../../../assets/images/chat-banner.png" alt="" />
+  <div class="login-container">
+    <p-card styleClass="shadow-8 border-round-2xl">
+      <div class="login-body">
+        <div class="login-title">
+          <img src="../../../../assets/images/icon.png" alt="" />
+          <p class="text-4xl">BAM Chat</p>
+        </div>
+        <form [formGroup]="loginForm" (ngSubmit)="login()">
+          <div class="p-inputgroup">
+            <span class="p-inputgroup-addon bg-cyan-600">
+              <i class="pi pi-at text-white"></i>
+            </span>
+            <span class="p-float-label">
+              <input type="email" formControlName="email" pInputText />
+              <label for="inputgroup">Email</label>
+            </span>
+          </div>
+          <div class="p-inputgroup">
+            <span class="p-inputgroup-addon bg-cyan-600">
+              <i class="pi pi-unlock text-white"></i>
+            </span>
+            <span class="p-float-label">
+              <input
+                type="password"
+                [feedback]="false"
+                formControlName="password"
+                pPassword
+              />
+              <label for="inputgroup">Password</label>
+            </span>
+          </div>
+          <button
+            pButton
+            pRipple
+            type="submit"
+            class="p-button-raised p-button-info p-button-text bg-cyan-600 text-white"
+            [disabled]="!loginForm.valid"
+          >
+            Login
+          </button>
+        </form>
+      </div>
+    </p-card>
+  </div>
+</section>

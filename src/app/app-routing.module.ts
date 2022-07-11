@@ -8,9 +8,9 @@ const routes: Routes = [
       import('@modules/components/home/home.module').then((m) => m.HomeModule),
   },
   {
-    path: 'signin',
+    path: 'login',
     loadChildren: () =>
-      import('@modules/components/home/home.module').then((m) => m.HomeModule),
+      import('@modules/components/login/login.module').then((m) => m.LoginModule),
   },
   {
     path: 'signup',

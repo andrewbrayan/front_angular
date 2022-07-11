@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
 import { of } from 'rxjs';
-import { map, mergeMap, catchError } from 'rxjs/operators';
+import { map, mergeMap, catchError, tap } from 'rxjs/operators';
 
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 
 import { ChatAPIService } from '@shared/services/chat-api.service';
-import { UserModel } from '@shared/models/models';
+import { loginUser } from '../actions/user.actions';
 
 @Injectable()
 export class UserEffects {
@@ -15,7 +15,20 @@ export class UserEffects {
       mergeMap(() =>
         this.ChatAPI.getUser().pipe(
           map((user) => ({ type: '[User] Load User Success', userData: user })),
-          catchError(() => of({ type: '[User] Load User error' }))
+          catchError(() => of({ type: '[User] Load User Error' }))
+        )
+      )
+    )
+  );
+
+  loginUser$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(loginUser),
+      mergeMap((action) =>
+        this.ChatAPI.getToken(action.credentials).pipe(
+          map((token) => ({ type: '[User] Load User', userToken: token })),
+          catchError(() => of({ type: '[User] Load User Error' })),
+          tap((data) => {console.log(data)})
         )
       )
     )

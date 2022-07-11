@@ -8,3 +8,8 @@ export interface UserModel {
   image: String;
   role: String;
 }
+
+export interface LoginUserModel {
+  email: String;
+  password: String;
+}
