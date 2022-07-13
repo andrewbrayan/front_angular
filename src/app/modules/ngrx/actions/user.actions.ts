@@ -3,7 +3,6 @@ import { LoginUserModel, UserModel } from '@shared/models/models';
 
 export const loadUser = createAction(
   '[User] Load User',
-  props<{ userToken?: string }>()
 );
 
 export const loginUser = createAction(
@@ -17,5 +16,6 @@ export const loadUserSuccess = createAction(
 );
 
 export const loadUserError = createAction(
-  '[User] Load User Error'
+  '[User] Load User Error',
+  props<{ error: string }>()
 );

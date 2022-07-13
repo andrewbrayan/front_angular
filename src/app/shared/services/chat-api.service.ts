@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { UserModel } from '@shared/models/models';
-import { map, Observable } from 'rxjs';
+import { Observable } from 'rxjs';
 
 const url = 'https://bam-chat.herokuapp.com/api';
 
@@ -9,23 +9,33 @@ const url = 'https://bam-chat.herokuapp.com/api';
   providedIn: 'root',
 })
 export class ChatAPIService {
-  httpOptions: { headers: HttpHeaders } = {
-    headers: new HttpHeaders().set(
-      'Authorization',
-      localStorage.getItem('token') || ''
-    ),
-  };
+  httpOptions: { headers: HttpHeaders };
+  token: string;
+  constructor(private httpClient: HttpClient) {
+    this.token = localStorage.getItem('token') || 'NoToken';
 
-  constructor(private httpClient: HttpClient) {}
+    this.httpOptions = {
+      headers: new HttpHeaders().set('Authorization', this.token),
+    };
+  }
+
+  setToken(token: string): void {
+    this.httpOptions = {
+      headers: new HttpHeaders().set('Authorization', token),
+    };
+  }
 
   getToken(credentials?: {
     email: String;
     password: String;
-  }): Observable<String> {
-    return this.httpClient.post<String>(`${url}/login`, {
-      ...credentials,
-      getToken: true,
-    });
+  }): Observable<{ message: string; token: string }> {
+    return this.httpClient.post<{ message: string; token: string }>(
+      `${url}/login`,
+      {
+        ...credentials,
+        getToken: true,
+      }
+    );
   }
 
   getUser(id?: string): Observable<UserModel> {
@@ -34,4 +44,9 @@ export class ChatAPIService {
       this.httpOptions
     );
   }
+
+  getUsers(): Observable<UserModel[]> {
+    return this.httpClient.get<UserModel[]>(`${url}/getUsers`, this.httpOptions);
+  }
+
 }

@@ -1,16 +1,18 @@
 import { Component, OnInit } from '@angular/core';
-import { MessageService, MenuItem } from 'primeng/api';
-
+import { MenuItem } from 'primeng/api';
+import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
+import { UsersModalComponent } from '@shared/components/users-modal/users-modal.component';
 
 @Component({
   selector: 'app-sidebar-header',
   templateUrl: './sidebar-header.component.html',
   styleUrls: ['./sidebar-header.component.scss'],
+  providers: [DialogService],
 })
 export class SidebarHeaderComponent implements OnInit {
   items: MenuItem[] = [];
 
-  constructor() {}
+  constructor(public dialogService: DialogService) {}
 
   ngOnInit() {
     this.items = [
@@ -21,6 +23,7 @@ export class SidebarHeaderComponent implements OnInit {
         },
         icon: 'pi pi-plus',
         command: () => {
+          this.show();
         },
       },
       {
@@ -29,9 +32,18 @@ export class SidebarHeaderComponent implements OnInit {
           tooltipLabel: 'New Group Chat',
         },
         icon: 'pi pi-users',
-        command: () => {
-        },
+        command: () => {},
       },
     ];
+  }
+
+  show() {
+    const ref: DynamicDialogRef = this.dialogService.open(UsersModalComponent, {
+      data: {
+        id: '51gF3',
+      },
+      header: 'Choose a User',
+      width: '70%',
+    });
   }
 }

@@ -19,7 +19,7 @@ import { UserEffects } from '@modules/ngrx/effects/user.effects';
 @NgModule({
   declarations: [
     AppComponent,
-    LoadingComponent
+    LoadingComponent,
   ],
   imports: [
     BrowserModule,

@@ -15,7 +15,9 @@ export class UserEffects {
       mergeMap(() =>
         this.ChatAPI.getUser().pipe(
           map((user) => ({ type: '[User] Load User Success', userData: user })),
-          catchError(() => of({ type: '[User] Load User Error' }))
+          catchError((res) =>
+            of({ type: '[User] Load User Error', error: res.message })
+          )
         )
       )
     )
@@ -26,13 +28,23 @@ export class UserEffects {
       ofType(loginUser),
       mergeMap((action) =>
         this.ChatAPI.getToken(action.credentials).pipe(
-          map((token) => ({ type: '[User] Load User', userToken: token })),
-          catchError(() => of({ type: '[User] Load User Error' })),
-          tap((data) => {console.log(data)})
+          tap((data) => {
+            localStorage.setItem('token', data.token);
+          }),
+          tap((data) => {
+            this.ChatAPI.setToken(data.token);
+          }),
+          map(() => ({ type: '[User] Load User' })),
+          catchError((res) =>
+            of({ type: '[User] Load User Error', error: res.message })
+          )
         )
       )
     )
   );
 
-  constructor(private actions$: Actions, private ChatAPI: ChatAPIService) {}
+  constructor(
+    private actions$: Actions,
+    private ChatAPI: ChatAPIService,
+  ) {}
 }

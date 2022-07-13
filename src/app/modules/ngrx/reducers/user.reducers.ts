@@ -19,16 +19,16 @@ export const initialState: UserState = {
 
 export const userReducer = createReducer(
   initialState,
-  on(loadUser, (state: UserState, {userToken}) => {
+  on(loadUser, (state: UserState) => {
     return { ...state, loading: true };
   }),
   on(loginUser, (state: UserState, {credentials}) => {
     return { ...state, loading: true };
   }),
   on(loadUserSuccess, (state: UserState, {userData}) => {
-    return { ...state, userData, loading: false };
+    return { ...state, userData, error: '',  loading: false };
   }),
-  on(loadUserError, (state: UserState) => {
-    return { ...state, error: 'COD001', loading: false };
+  on(loadUserError, (state: UserState, {error}) => {
+    return { ...state, error: error, loading: false };
   })
 );
