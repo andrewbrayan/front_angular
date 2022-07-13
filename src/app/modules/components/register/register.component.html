@@ -1,0 +1,51 @@
+<section class="main-container">
+  <img src="../../../../assets/images/chat-banner.png" alt="" />
+  <div class="register-container">
+    <p-card styleClass="shadow-8 border-round-2xl">
+      <div class="register-body">
+        <div class="register-title">
+          <img src="../../../../assets/images/icon.png" alt="" />
+          <p class="text-4xl">BAM Chat</p>
+        </div>
+        <form [formGroup]="registerForm" (ngSubmit)="register()">
+          <div class="p-inputgroup">
+            <span class="p-inputgroup-addon bg-cyan-600">
+              <i class="pi pi-user text-white"></i>
+            </span>
+            <span class="p-float-label">
+              <input type="text" formControlName="username" pKeyFilter="alphanum" pInputText />
+              <label for="inputgroup">Username</label>
+            </span>
+          </div>
+          <div class="p-inputgroup">
+            <span class="p-inputgroup-addon bg-cyan-600">
+              <i class="pi pi-at text-white"></i>
+            </span>
+            <span class="p-float-label">
+              <input type="email" formControlName="email" pInputText />
+              <label for="inputgroup">Email</label>
+            </span>
+          </div>
+          <div class="p-inputgroup">
+            <span class="p-inputgroup-addon bg-cyan-600">
+              <i class="pi pi-unlock text-white"></i>
+            </span>
+            <p-password formControlName="password" [toggleMask]="true" placeholder="Password"
+              styleClass="p-password p-component p-inputwrapper p-input-icon-right"></p-password>
+          </div>
+          <div class="p-inputgroup">
+            <span class="p-inputgroup-addon bg-cyan-600">
+              <i class="pi pi-unlock text-white"></i>
+            </span>
+            <p-password formControlName="confirmPassword" [feedback]="false" [toggleMask]="true" placeholder="Password"
+              styleClass="p-password p-component p-inputwrapper p-input-icon-right"></p-password>
+          </div>
+          <button pButton pRipple type="submit"
+            class="p-button-raised p-button-info p-button-text bg-cyan-600 text-white" [disabled]="!registerForm.valid">
+            register
+          </button>
+        </form>
+      </div>
+    </p-card>
+  </div>
+</section>

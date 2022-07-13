@@ -43,7 +43,8 @@ export class SidebarHeaderComponent implements OnInit {
         id: '51gF3',
       },
       header: 'Choose a User',
-      width: '70%',
+      width: '50%',
+      height: '50%',
     });
   }
 }

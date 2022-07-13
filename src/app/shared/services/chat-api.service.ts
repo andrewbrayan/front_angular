@@ -42,12 +42,11 @@ export class ChatAPIService {
     username: String;
     email: String;
     password: String;
-  }): Observable<{ message: string; token: string }> {
-    return this.httpClient.post<{ message: string; token: string }>(
-      `${url}/login`,
+  }): Observable<{ message: string; user: string }> {
+    return this.httpClient.post<{ message: string; user: string }>(
+      `${url}/register`,
       {
         ...credentials,
-        getToken: true,
       }
     );
   }

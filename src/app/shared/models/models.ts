@@ -13,3 +13,15 @@ export interface LoginUserModel {
   email: String;
   password: String;
 }
+
+export interface RegisterUserModel {
+  username: String;
+  email: String;
+  password: String;
+}
+
+export interface ItemSearchUserList {
+  username: String;
+  name: String;
+  surname: String;
+}

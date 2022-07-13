@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { UserModel } from '@shared/models/models';
+import { ItemSearchUserList, UserModel } from '@shared/models/models';
 import { ChatAPIService } from '@shared/services/chat-api.service';
 import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
 
@@ -10,7 +10,7 @@ import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
 })
 export class UsersModalComponent implements OnInit {
   text: string = '';
-  results: String[] = [];
+  userList: ItemSearchUserList[] = [];
 
   constructor(
     public ref: DynamicDialogRef,
@@ -19,16 +19,27 @@ export class UsersModalComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.chatAPIService.getUsers().subscribe((users: UserModel[]) => {
+    this.chatAPIService.getUsers().subscribe((Results: any) => {
+      let users: UserModel[] = Results.users;
       users.forEach((user) => {
-        this.results.push(user.username);
+        let item: ItemSearchUserList = {
+          username: user.username,
+          name: user.name,
+          surname: user.surname,
+        };
+        this.userList.push(item);
+        console.log(this.userList);
       });
     });
   }
 
   search(event: any) {
-    this.results = this.results.filter((user) => {
-      return user.toLowerCase().includes(event.query.toLowerCase());
+    this.userList = this.userList.filter((user) => {
+      return (
+        user.username.toLowerCase().includes(event.query.toLowerCase()) ||
+        user.name.toLowerCase().includes(event.query.toLowerCase()) ||
+        user.surname.toLowerCase().includes(event.query.toLowerCase())
+      );
     });
   }
 }

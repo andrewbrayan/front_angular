@@ -1,5 +1,5 @@
 import { createAction, props } from '@ngrx/store';
-import { LoginUserModel, UserModel } from '@shared/models/models';
+import { LoginUserModel, RegisterUserModel, UserModel } from '@shared/models/models';
 
 export const loadUser = createAction(
   '[User] Load User',
@@ -8,6 +8,11 @@ export const loadUser = createAction(
 export const loginUser = createAction(
   '[User] Login User',
   props<{ credentials: LoginUserModel }>()
+);
+
+export const registerUser = createAction(
+  '[User] register User',
+  props<{ credentials: RegisterUserModel }>()
 );
 
 export const loadUserSuccess = createAction(

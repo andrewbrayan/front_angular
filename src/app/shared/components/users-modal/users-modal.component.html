@@ -1,3 +1,8 @@
-<section>
-  <!-- <p-autoComplete [(ngModel)]="text" ></p-autoComplete> -->
+<section class="p-fluid">
+  <p-autoComplete [(ngModel)]="text" [suggestions]="userList" (completeMethod)="search($event)" [dropdown]="true">
+    <ng-template let-user pTemplate="item">
+      <p>{{user.username}}</p>
+      <p>{{user.name}} {{user.surname}}</p>
+    </ng-template>
+  </p-autoComplete>
 </section>

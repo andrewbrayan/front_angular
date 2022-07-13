@@ -1,5 +1,5 @@
 import { createReducer, on } from '@ngrx/store';
-import { loadUser, loadUserError, loadUserSuccess, loginUser } from '@modules/ngrx/actions/user.actions';
+import { loadUser, loadUserError, loadUserSuccess, loginUser, registerUser } from '@modules/ngrx/actions/user.actions';
 import { UserState } from '@modules/ngrx/models/user.state';
 
 export const initialState: UserState = {
@@ -22,7 +22,10 @@ export const userReducer = createReducer(
   on(loadUser, (state: UserState) => {
     return { ...state, loading: true };
   }),
-  on(loginUser, (state: UserState, {credentials}) => {
+  on(loginUser, (state: UserState) => {
+    return { ...state, loading: true };
+  }),
+  on(registerUser, (state: UserState) => {
     return { ...state, loading: true };
   }),
   on(loadUserSuccess, (state: UserState, {userData}) => {
