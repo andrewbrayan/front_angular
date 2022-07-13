@@ -25,7 +25,21 @@ export class ChatAPIService {
     };
   }
 
-  getToken(credentials?: {
+  login(credentials?: {
+    email: String;
+    password: String;
+  }): Observable<{ message: string; token: string }> {
+    return this.httpClient.post<{ message: string; token: string }>(
+      `${url}/login`,
+      {
+        ...credentials,
+        getToken: true,
+      }
+    );
+  }
+
+  register(credentials?: {
+    username: String;
     email: String;
     password: String;
   }): Observable<{ message: string; token: string }> {

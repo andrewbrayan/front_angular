@@ -27,7 +27,7 @@ export class UserEffects {
     this.actions$.pipe(
       ofType(loginUser),
       mergeMap((action) =>
-        this.ChatAPI.getToken(action.credentials).pipe(
+        this.ChatAPI.login(action.credentials).pipe(
           tap((data) => {
             localStorage.setItem('token', data.token);
           }),
@@ -42,6 +42,26 @@ export class UserEffects {
       )
     )
   );
+
+  registerUser$ = createEffect(() =>
+  this.actions$.pipe(
+    ofType(loginUser),
+    mergeMap((action) =>
+      this.ChatAPI.register(action.credentials).pipe(
+        tap((data) => {
+          localStorage.setItem('token', data.token);
+        }),
+        tap((data) => {
+          this.ChatAPI.setToken(data.token);
+        }),
+        map(() => ({ type: '[User] Load User' })),
+        catchError((res) =>
+          of({ type: '[User] Load User Error', error: res.message })
+        )
+      )
+    )
+  )
+);
 
   constructor(
     private actions$: Actions,
