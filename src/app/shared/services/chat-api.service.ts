@@ -11,6 +11,7 @@ const url = 'https://bam-chat.herokuapp.com/api';
 export class ChatAPIService {
   httpOptions: { headers: HttpHeaders };
   token: string;
+
   constructor(private httpClient: HttpClient) {
     this.token = localStorage.getItem('token') || 'NoToken';
 
@@ -29,13 +30,7 @@ export class ChatAPIService {
     email: String;
     password: String;
   }): Observable<{ message: string; token: string }> {
-    return this.httpClient.post<{ message: string; token: string }>(
-      `${url}/login`,
-      {
-        ...credentials,
-        getToken: true,
-      }
-    );
+    return this.httpClient.post<{ message: string; token: string }>(`${url}/login`, {  ...credentials, getToken: true });
   }
 
   register(credentials?: {
@@ -43,12 +38,7 @@ export class ChatAPIService {
     email: String;
     password: String;
   }): Observable<{ message: string; user: string }> {
-    return this.httpClient.post<{ message: string; user: string }>(
-      `${url}/register`,
-      {
-        ...credentials,
-      }
-    );
+    return this.httpClient.post<{ message: string; user: string }>(`${url}/register`, {...credentials});
   }
 
   getUser(id?: string): Observable<UserModel> {
@@ -60,6 +50,10 @@ export class ChatAPIService {
 
   getUsers(): Observable<UserModel[]> {
     return this.httpClient.get<UserModel[]>(`${url}/getUsers`, this.httpOptions);
+  }
+
+  getChats(): Observable<any> {
+    return this.httpClient.get<any>(`${url}/getChats`, this.httpOptions);
   }
 
 }

@@ -30,15 +30,15 @@ export class AppComponent {
   ) {}
 
   ngOnInit() {
-    // this.store.dispatch(loadUser());
-    // this.loadingUser$ = this.store.select(selectLoading);
-    // this.store.select(selectError).subscribe((error) => {
-    //   if (error) {
-    //     this.router.navigate(['/login']);
-    //   } else {
-    //     this.router.navigate(['/chat']);
-    //   }
-    // });
+    this.store.dispatch(loadUser());
+    this.loadingUser$ = this.store.select(selectLoading);
+    this.store.select(selectError).subscribe((error) => {
+      if (error) {
+        this.router.navigate(['/login']);
+      } else {
+        this.router.navigate(['/chat']);
+      }
+    });
     this.primengConfig.ripple = true;
   }
 }

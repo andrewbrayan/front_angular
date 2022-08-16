@@ -14,7 +14,7 @@ export class UserEffects {
       ofType('[User] Load User'),
       mergeMap(() =>
         this.ChatAPI.getUser().pipe(
-          map((user) => ({ type: '[User] Load User Success', userData: user })),
+          map((userData) => ({ type: '[User] Load User Success', userData })),
           catchError((res) =>
             of({ type: '[User] Load User Error', error: res.message })
           )
@@ -44,18 +44,32 @@ export class UserEffects {
   );
 
   registerUser$ = createEffect(() =>
-  this.actions$.pipe(
-    ofType(registerUser),
-    mergeMap((action) =>
-      this.ChatAPI.register(action.credentials).pipe(
-        map(() => ({ type: '[User] Load User' })),
-        catchError((res) =>
-          of({ type: '[User] Load User Error', error: res.message })
+    this.actions$.pipe(
+      ofType(registerUser),
+      mergeMap((action) =>
+        this.ChatAPI.register(action.credentials).pipe(
+          map(() => ({ type: '[User] Load User' })),
+          catchError((res) =>
+            of({ type: '[User] Load User Error', error: res.message })
+          )
         )
       )
     )
-  )
-);
+  );
+
+  getChats$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType('[User] Load User'),
+      mergeMap(() =>
+        this.ChatAPI.getChats().pipe(
+          map((chats) => ({ type: '[User] Load User Success', chats })),
+          catchError((res) =>
+            of({ type: '[User] Load User Error', error: res.message })
+          )
+        )
+      )
+    )
+  );
 
   constructor(
     private actions$: Actions,
