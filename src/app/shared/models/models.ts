@@ -1,5 +1,5 @@
 export interface UserModel {
-  _id: string;
+  _id: String;
   name: String;
   surname: String;
   username: String;
@@ -7,6 +7,14 @@ export interface UserModel {
   password: String;
   image: String;
   role: String;
+}
+
+export interface ChatModel {
+  _id: String,
+  users: [String],
+  messages: [any],
+  createdAt: String,
+  type: String,
 }
 
 export interface LoginUserModel {

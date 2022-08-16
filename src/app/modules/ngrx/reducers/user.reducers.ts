@@ -1,5 +1,5 @@
 import { createReducer, on } from '@ngrx/store';
-import { loadUser, loadUserError, loadUserSuccess, loginUser, registerUser } from '@modules/ngrx/actions/user.actions';
+import { loadChatsUser, loadChatsUserError, loadChatsUserSuccess, loadUser, loadUserError, loadUserSuccess, loginUser, registerUser } from '@modules/ngrx/actions/user.actions';
 import { UserState } from '@modules/ngrx/models/user.state';
 
 export const initialState: UserState = {
@@ -15,6 +15,7 @@ export const initialState: UserState = {
     image: '',
     role: '',
   },
+  chatsUser: [],
 };
 
 export const userReducer = createReducer(
@@ -33,5 +34,14 @@ export const userReducer = createReducer(
   }),
   on(loadUserError, (state: UserState, {error}) => {
     return { ...state, error: error, loading: false };
-  })
+  }),
+  on(loadChatsUser, (state: UserState) => {
+    return { ...state, loading: true };
+  }),
+  on(loadChatsUserSuccess, (state: UserState, {chatsUser}) => {
+    return { ...state, chatsUser, loading: false };
+  }),
+  on(loadChatsUserError, (state: UserState, {error}) => {
+    return { ...state, error: error, loading: false };
+  }),
 );

@@ -6,6 +6,7 @@ import { Actions, createEffect, ofType } from '@ngrx/effects';
 
 import { ChatAPIService } from '@shared/services/chat-api.service';
 import { loginUser, registerUser } from '../actions/user.actions';
+import { ChatModel } from '@shared/models/models';
 
 @Injectable()
 export class UserEffects {
@@ -14,6 +15,7 @@ export class UserEffects {
       ofType('[User] Load User'),
       mergeMap(() =>
         this.ChatAPI.getUser().pipe(
+          tap (userData => console.log(userData)),
           map((userData) => ({ type: '[User] Load User Success', userData })),
           catchError((res) =>
             of({ type: '[User] Load User Error', error: res.message })
@@ -59,10 +61,10 @@ export class UserEffects {
 
   getChats$ = createEffect(() =>
     this.actions$.pipe(
-      ofType('[User] Load User'),
+      ofType('[User] Load Chats User'),
       mergeMap(() =>
         this.ChatAPI.getChats().pipe(
-          map((chats) => ({ type: '[User] Load User Success', chats })),
+          map((chats: [ChatModel]) => ({ type: '[User] Load User Success', chats })),
           catchError((res) =>
             of({ type: '[User] Load User Error', error: res.message })
           )

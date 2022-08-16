@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { UserModel } from '@shared/models/models';
+import { ChatModel, LoginUserModel, RegisterUserModel, UserModel } from '@shared/models/models';
 import { Observable } from 'rxjs';
 
 const url = 'https://bam-chat.herokuapp.com/api';
+
 
 @Injectable({
   providedIn: 'root',
@@ -26,34 +27,24 @@ export class ChatAPIService {
     };
   }
 
-  login(credentials?: {
-    email: String;
-    password: String;
-  }): Observable<{ message: string; token: string }> {
+  login(credentials?: LoginUserModel): Observable<{ message: string; token: string }> {
     return this.httpClient.post<{ message: string; token: string }>(`${url}/login`, {  ...credentials, getToken: true });
   }
 
-  register(credentials?: {
-    username: String;
-    email: String;
-    password: String;
-  }): Observable<{ message: string; user: string }> {
+  register(credentials?: RegisterUserModel): Observable<{ message: string; user: string }> {
     return this.httpClient.post<{ message: string; user: string }>(`${url}/register`, {...credentials});
   }
 
   getUser(id?: string): Observable<UserModel> {
-    return this.httpClient.get<UserModel>(
-      `${url}/getUser${id ? `/${id}` : ''}`,
-      this.httpOptions
-    );
+    return this.httpClient.get<UserModel>(`${url}/getUser${id ? `/${id}` : ''}`, this.httpOptions );
   }
 
   getUsers(): Observable<UserModel[]> {
     return this.httpClient.get<UserModel[]>(`${url}/getUsers`, this.httpOptions);
   }
 
-  getChats(): Observable<any> {
-    return this.httpClient.get<any>(`${url}/getChats`, this.httpOptions);
+  getChats(): Observable<[ChatModel]> {
+    return this.httpClient.get<[ChatModel]>(`${url}/getChats`, this.httpOptions);
   }
 
 }

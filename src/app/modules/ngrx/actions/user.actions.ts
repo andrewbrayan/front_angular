@@ -1,5 +1,5 @@
 import { createAction, props } from '@ngrx/store';
-import { LoginUserModel, RegisterUserModel, UserModel } from '@shared/models/models';
+import { ChatModel, LoginUserModel, RegisterUserModel, UserModel } from '@shared/models/models';
 
 export const loadUser = createAction(
   '[User] Load User',
@@ -22,5 +22,19 @@ export const loadUserSuccess = createAction(
 
 export const loadUserError = createAction(
   '[User] Load User Error',
+  props<{ error: string }>()
+);
+
+export const loadChatsUser = createAction(
+  '[User] Load Chats User'
+);
+
+export const loadChatsUserSuccess = createAction(
+  '[User] Load Chats User Success',
+  props<{ chatsUser: [ChatModel] }>()
+);
+
+export const loadChatsUserError = createAction(
+  '[User] Load Chats User Error',
   props<{ error: string }>()
 );
