@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { ChatModel } from '@shared/models/models';
 
 @Component({
   selector: 'app-sidebar-chat',
@@ -6,8 +7,10 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./sidebar-chat.component.scss']
 })
 export class SidebarChatComponent implements OnInit {
+  @Input() chat: ChatModel | undefined;
 
-  constructor() { }
+  constructor() {
+  }
 
   ngOnInit(): void {
   }

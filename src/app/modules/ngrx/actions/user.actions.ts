@@ -25,13 +25,9 @@ export const loadUserError = createAction(
   props<{ error: string }>()
 );
 
-export const loadChatsUser = createAction(
-  '[User] Load Chats User'
-);
-
 export const loadChatsUserSuccess = createAction(
   '[User] Load Chats User Success',
-  props<{ chatsUser: [ChatModel] }>()
+  props<{ userChats: [ChatModel] }>()
 );
 
 export const loadChatsUserError = createAction(

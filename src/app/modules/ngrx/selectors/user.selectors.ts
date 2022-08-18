@@ -9,6 +9,11 @@ export const selectUserData = createSelector(
   (state: UserState) => state.userData
 );
 
+export const selectUserChats = createSelector(
+  selectUser,
+  (state: UserState) => state.userChats
+);
+
 export const selectLoading = createSelector(
   selectUser,
   (state: UserState) => state.loading

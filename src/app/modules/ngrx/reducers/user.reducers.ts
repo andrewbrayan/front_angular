@@ -1,5 +1,5 @@
 import { createReducer, on } from '@ngrx/store';
-import { loadChatsUser, loadChatsUserError, loadChatsUserSuccess, loadUser, loadUserError, loadUserSuccess, loginUser, registerUser } from '@modules/ngrx/actions/user.actions';
+import { loadChatsUserError, loadChatsUserSuccess, loadUser, loadUserError, loadUserSuccess, loginUser, registerUser } from '@modules/ngrx/actions/user.actions';
 import { UserState } from '@modules/ngrx/models/user.state';
 
 export const initialState: UserState = {
@@ -15,7 +15,7 @@ export const initialState: UserState = {
     image: '',
     role: '',
   },
-  chatsUser: [],
+  userChats: [],
 };
 
 export const userReducer = createReducer(
@@ -33,15 +33,12 @@ export const userReducer = createReducer(
     return { ...state, userData, error: '',  loading: false };
   }),
   on(loadUserError, (state: UserState, {error}) => {
-    return { ...state, error: error, loading: false };
+    return { ...state, error, loading: false };
   }),
-  on(loadChatsUser, (state: UserState) => {
-    return { ...state, loading: true };
-  }),
-  on(loadChatsUserSuccess, (state: UserState, {chatsUser}) => {
-    return { ...state, chatsUser, loading: false };
+  on(loadChatsUserSuccess, (state: UserState, {userChats}) => {
+    return { ...state, userChats, loading: false };
   }),
   on(loadChatsUserError, (state: UserState, {error}) => {
-    return { ...state, error: error, loading: false };
+    return { ...state, error, loading: false };
   }),
 );

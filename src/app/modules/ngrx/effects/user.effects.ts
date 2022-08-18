@@ -6,7 +6,8 @@ import { Actions, createEffect, ofType } from '@ngrx/effects';
 
 import { ChatAPIService } from '@shared/services/chat-api.service';
 import { loginUser, registerUser } from '../actions/user.actions';
-import { ChatModel } from '@shared/models/models';
+import { ChatModel, UserModel } from '@shared/models/models';
+import { Router } from '@angular/router';
 
 @Injectable()
 export class UserEffects {
@@ -15,8 +16,8 @@ export class UserEffects {
       ofType('[User] Load User'),
       mergeMap(() =>
         this.ChatAPI.getUser().pipe(
-          tap (userData => console.log(userData)),
-          map((userData) => ({ type: '[User] Load User Success', userData })),
+          map((userData: UserModel) => ({ type: '[User] Load User Success', userData })),
+          tap(() => this.router.navigate(['/chat'])),
           catchError((res) =>
             of({ type: '[User] Load User Error', error: res.message })
           )
@@ -61,20 +62,29 @@ export class UserEffects {
 
   getChats$ = createEffect(() =>
     this.actions$.pipe(
-      ofType('[User] Load Chats User'),
+      ofType('[User] Load User Success'),
       mergeMap(() =>
         this.ChatAPI.getChats().pipe(
-          map((chats: [ChatModel]) => ({ type: '[User] Load User Success', chats })),
+          map((userChats: [ChatModel]) => ({ type: '[User] Load Chats User Success', userChats })),
           catchError((res) =>
-            of({ type: '[User] Load User Error', error: res.message })
+            of({ type: '[User] Load Chats User Error', error: res.message })
           )
         )
       )
     )
   );
 
+  errorLoadUser$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType('[User] Load User Error'),
+      tap(() => this.router.navigate(['/login'])),
+      map(() => ({ type: '[User] Redirect to login' })),
+    )
+  );
+
   constructor(
     private actions$: Actions,
     private ChatAPI: ChatAPIService,
+    private router: Router
   ) {}
 }

@@ -7,6 +7,6 @@
     </span>
   </section>
   <section class="h-full">
-    <app-sidebar-chat></app-sidebar-chat>
+    <app-sidebar-chat *ngFor="let chat of ChatList | async" [chat]="chat">hola</app-sidebar-chat>
   </section>
 </section>
