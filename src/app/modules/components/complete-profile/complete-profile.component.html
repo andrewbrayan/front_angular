@@ -1,0 +1,19 @@
+<section class="main-container">
+  <p-card>
+    <div class="card-body">
+      <div class="avatar-container">
+        <p-avatar [style]="{'width': '15rem', 'height': '15rem'}" image="../../../../assets/images/user.png" size="xlarge">
+          <!-- <span><i class="pi pi-pencil" style="font-size: 2rem"></i></span> -->
+        </p-avatar>
+      </div>
+      <div class="form-container">
+        <p-card [style]="{'margin-bottom': '1rem'}">
+          <p-steps [model]="items" [(activeIndex)]="activeIndex"></p-steps>
+        </p-card>
+        <p-card>
+          <p-steps [model]="items" [(activeIndex)]="activeIndex"></p-steps>
+        </p-card>
+      </div>
+    </div>
+  </p-card>
+</section>

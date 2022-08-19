@@ -17,6 +17,11 @@ const routes: Routes = [
     loadChildren: () =>
       import('@modules/components/register/register.module').then((m) => m.RegisterModule),
   },
+  {
+    path: 'complete-profile',
+    loadChildren: () =>
+      import('@modules/components/complete-profile/complete-profile.module').then((m) => m.CompleteProfileModule),
+  },
 ];
 
 @NgModule({

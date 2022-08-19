@@ -17,7 +17,13 @@ export class UserEffects {
       mergeMap(() =>
         this.ChatAPI.getUser().pipe(
           map((userData: UserModel) => ({ type: '[User] Load User Success', userData })),
-          tap(() => this.router.navigate(['/chat'])),
+          tap(({userData}) => {
+            if (userData.role === 'NEW_USER') {
+              this.router.navigate(['/complete-profile']);
+            } else {
+              this.router.navigate(['/chat'])
+            }
+          }),
           catchError((res) =>
             of({ type: '[User] Load User Error', error: res.message })
           )

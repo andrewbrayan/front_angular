@@ -11,7 +11,7 @@ export interface UserModel {
 
 export interface ChatModel {
   _id: String,
-  users: [String],
+  users: [UserModel],
   messages: [any],
   createdAt: String,
   type: String,
