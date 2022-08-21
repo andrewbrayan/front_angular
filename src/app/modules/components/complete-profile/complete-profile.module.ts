@@ -6,7 +6,9 @@ import { CompleteProfileComponent } from './complete-profile.component';
 
 import { CardModule } from 'primeng/card';
 import { AvatarModule } from 'primeng/avatar';
-import { StepsModule } from 'primeng/steps';
+import { InputTextModule } from "primeng/inputtext";
+import { ButtonModule } from 'primeng/button';
+import { TooltipModule } from 'primeng/tooltip';
 
 @NgModule({
   declarations: [
@@ -17,7 +19,9 @@ import { StepsModule } from 'primeng/steps';
     CompleteProfileRoutingModule,
     CardModule,
     AvatarModule,
-    StepsModule
+    InputTextModule,
+    ButtonModule,
+    TooltipModule
   ]
 })
 export class CompleteProfileModule { }

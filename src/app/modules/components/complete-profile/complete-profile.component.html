@@ -1,17 +1,39 @@
 <section class="main-container">
-  <p-card>
+  <p-card styleClass="shadow-8">
+    <ng-template pTemplate="header" >
+      <h1 class="title">Complete Your Perfil</h1>
+    </ng-template>
     <div class="card-body">
       <div class="avatar-container">
-        <p-avatar [style]="{'width': '15rem', 'height': '15rem'}" image="../../../../assets/images/user.png" size="xlarge">
-          <!-- <span><i class="pi pi-pencil" style="font-size: 2rem"></i></span> -->
+        <p-avatar styleClass="avatarCustom" image="../../../../assets/images/user.png" (click)="fileInput.click()">
+          <input #fileInput type="file" hidden (change)="uploadAvatar($event)" accept=".png, .jpg, .jpeg, .gif">
+          <span class="editIcon bg-purple-500 text-white" pTooltip="Upload your profile picture"><i class="pi pi-pencil" style="font-size: 1.3rem"></i></span>
         </p-avatar>
       </div>
       <div class="form-container">
-        <p-card [style]="{'margin-bottom': '1rem'}">
-          <p-steps [model]="items" [(activeIndex)]="activeIndex"></p-steps>
-        </p-card>
-        <p-card>
-          <p-steps [model]="items" [(activeIndex)]="activeIndex"></p-steps>
+        <p-card styleClass="shadow-5">
+          <ng-template pTemplate="header" >
+            <h1 class="title">What's your name?</h1>
+          </ng-template>
+          <div class="p-fluid grid">
+            <div class="field col-12">
+                <span class="p-float-label">
+                    <input type="text" id="inputtext" pInputText>
+                    <label for="inputtext">Firs Name</label>
+                </span>
+            </div>
+            <div class="field col-12">
+                <span class="p-float-label">
+                    <input type="text" id="inputtext-left" pInputText>
+                    <label for="inputtext-left">Surname</label>
+                </span>
+            </div>
+          </div>
+          <ng-template pTemplate="footer">
+            <div class="buttons-container">
+              <button pButton class="p-button-success" label="Continue" icon="pi pi-check" iconPos="left"></button>
+            </div>
+          </ng-template>
         </p-card>
       </div>
     </div>
