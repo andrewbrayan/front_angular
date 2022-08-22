@@ -5,36 +5,38 @@
     </ng-template>
     <div class="card-body">
       <div class="avatar-container">
-        <p-avatar styleClass="avatarCustom" image="../../../../assets/images/user.png" (click)="fileInput.click()">
+        <p-avatar #avatar styleClass="avatarCustom" image="../../../../assets/images/user.png" (click)="fileInput.click()">
           <input #fileInput type="file" hidden (change)="uploadAvatar($event)" accept=".png, .jpg, .jpeg, .gif">
           <span class="editIcon bg-purple-500 text-white" pTooltip="Upload your profile picture"><i class="pi pi-pencil" style="font-size: 1.3rem"></i></span>
         </p-avatar>
       </div>
       <div class="form-container">
-        <p-card styleClass="shadow-5">
-          <ng-template pTemplate="header" >
-            <h1 class="title">What's your name?</h1>
-          </ng-template>
-          <div class="p-fluid grid">
-            <div class="field col-12">
-                <span class="p-float-label">
-                    <input type="text" id="inputtext" pInputText>
-                    <label for="inputtext">Firs Name</label>
-                </span>
+        <form [formGroup]="updateUserForm" (ngSubmit)="submitForm()">
+          <p-card styleClass="shadow-5">
+            <ng-template pTemplate="header" >
+              <h1 class="title">What's your name?</h1>
+            </ng-template>
+            <div class="p-fluid grid">
+              <div class="field col-12">
+                  <span class="p-float-label">
+                      <input type="text" id="inputtext" formControlName="name" pInputText>
+                      <label for="inputtext">Firs Name</label>
+                  </span>
+              </div>
+              <div class="field col-12">
+                  <span class="p-float-label">
+                      <input type="text" id="inputtext-left" formControlName="surName" pInputText>
+                      <label for="inputtext-left">Surname</label>
+                  </span>
+              </div>
             </div>
-            <div class="field col-12">
-                <span class="p-float-label">
-                    <input type="text" id="inputtext-left" pInputText>
-                    <label for="inputtext-left">Surname</label>
-                </span>
-            </div>
-          </div>
-          <ng-template pTemplate="footer">
-            <div class="buttons-container">
-              <button pButton class="p-button-success" label="Continue" icon="pi pi-check" iconPos="left"></button>
-            </div>
-          </ng-template>
-        </p-card>
+            <ng-template pTemplate="footer">
+              <div class="buttons-container">
+                <button pButton class="p-button-success" label="Continue" icon="pi pi-check" iconPos="left" type="submit"></button>
+              </div>
+            </ng-template>
+          </p-card>
+        </form>
       </div>
     </div>
   </p-card>

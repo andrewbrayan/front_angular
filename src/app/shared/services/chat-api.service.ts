@@ -47,7 +47,11 @@ export class ChatAPIService {
     return this.httpClient.get<[ChatModel]>(`${url}/getChats`, this.httpOptions);
   }
 
-  uploadAvatar(file: File): Observable<{ message: string; user: UserModel }> {
-    return this.httpClient.post<{ message: string; user: UserModel }>(`${url}/upload-avatar`, {image: file},this.httpOptions);
+  uploadAvatar(formData: FormData): Observable<{ message: string; user: UserModel }> {
+    return this.httpClient.post<{ message: string; user: UserModel }>(`${url}/upload-avatar`, formData, this.httpOptions);
+  }
+
+  uploadUser(params: {name: string, surname: string}): Observable<{ message: string; user: UserModel }> {
+    return this.httpClient.put<{ message: string; user: UserModel }>(`${url}/update`, params, this.httpOptions);
   }
 }

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ChatAPIService } from '@shared/services/chat-api.service';
 
 @Component({
@@ -7,21 +8,34 @@ import { ChatAPIService } from '@shared/services/chat-api.service';
   styleUrls: ['./complete-profile.component.scss'],
 })
 export class CompleteProfileComponent implements OnInit {
+  updateUserForm: FormGroup;
 
-
-  constructor(private chatApiService: ChatAPIService) {}
-
-  ngOnInit() {
+  constructor(private chatApiService: ChatAPIService) {
+    this.updateUserForm = new FormGroup({
+      name: new FormControl('', {
+        validators: [Validators.required],
+      }),
+      surName: new FormControl('', {
+        validators: [Validators.required],
+      }),
+    });
   }
+
+  ngOnInit() {}
 
   uploadAvatar($event: any) {
     const file: File = $event.target.files[0];
-    console.log(file);
     if (file.size <= 2100000) {
-      this.chatApiService.uploadAvatar(file).subscribe(res => {
-        console.log(res);
-      } );
+      const formData = new FormData();
+      formData.append('image', file);
+      this.chatApiService.uploadAvatar(formData)
     }
   }
 
+  submitForm() {
+    const {name, surname} = this.updateUserForm.value;
+    console.log(this.updateUserForm.value);
+
+    this.chatApiService.uploadUser({ name, surname })
+  }
 }
