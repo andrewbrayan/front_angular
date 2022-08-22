@@ -28,7 +28,11 @@ export class CompleteProfileComponent implements OnInit {
     if (file.size <= 2100000) {
       const formData = new FormData();
       formData.append('image', file);
-      this.chatApiService.uploadAvatar(formData)
+      this.chatApiService.uploadAvatar(formData).subscribe((res) => {
+        console.log(res);
+      }), (err: any) => {
+        console.log(err);
+      }
     }
   }
 
@@ -36,6 +40,10 @@ export class CompleteProfileComponent implements OnInit {
     const {name, surname} = this.updateUserForm.value;
     console.log(this.updateUserForm.value);
 
-    this.chatApiService.uploadUser({ name, surname })
+    this.chatApiService.uploadUser({ name, surname }).subscribe((res) => {
+      console.log(res);
+    }), (err: any) => {
+      console.log(err);
+    }
   }
 }
